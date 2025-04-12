@@ -6,28 +6,28 @@ import models.RegisterRequest;
 import models.RegisterResponse;
 import java.io.File;
 import java.io.IOException;
-import static specs.LogSpec.RequestSpec;
-import static specs.LogSpec.ResponseSpec200;
+import static specs.LogSpec.requestSpec;
+import static specs.LogSpec.responseSpec;
 import static io.restassured.RestAssured.given;
 
-public class AuthorizationApi {
+public class AuthorizationApiSteps {
     @Step("Авторизация пользователя")
-    public static RegisterResponse getAuthCookie(){
+    public static RegisterResponse getAuthCookie() {
         ObjectMapper objectMapper = new ObjectMapper();
         RegisterRequest registerRequest;
-        File jsonFile = new File(AuthorizationApi.class.getResource("/loginData.json").getFile());
+        File jsonFile = new File(AuthorizationApiSteps.class.getResource("/loginData.json").getFile());
         try {
-            registerRequest= objectMapper.readValue(jsonFile, RegisterRequest.class);
+            registerRequest = objectMapper.readValue(jsonFile, RegisterRequest.class);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return given(RequestSpec)
+        return given(requestSpec)
                 .body(registerRequest)
                 .when()
                 .post("/Account/v1/Login")
                 .then()
-                .spec(ResponseSpec200)
+                .spec(responseSpec(200))
                 .extract().as(RegisterResponse.class);
     }
-    
+
 }

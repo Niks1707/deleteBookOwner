@@ -20,6 +20,6 @@ public class AddBookRequest {
     public static class Isbn {
         private String isbn;
     }
-  
+
 
 }

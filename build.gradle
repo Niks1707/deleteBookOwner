@@ -61,3 +61,7 @@ task simpletest (type: Test) {
         includeTags("Test")
     }
 }
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}

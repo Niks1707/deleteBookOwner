@@ -9,28 +9,16 @@ import static io.restassured.filter.log.LogDetail.ALL;
 import static io.restassured.http.ContentType.JSON;
 
 public class LogSpec {
-    public static RequestSpecification RequestSpec = with()
+    public static RequestSpecification requestSpec = with()
             .filter(withCustomTemplates())
             .contentType(JSON)
             .log().all();
 
-    public static ResponseSpecification ResponseSpec200 = new ResponseSpecBuilder()
-            .expectStatusCode(200)
-            .log(ALL)
-            .build();
+    public static ResponseSpecification responseSpec(int statusCode) {
+        return new ResponseSpecBuilder()
+                .expectStatusCode(statusCode)
+                .log(ALL)
+                .build();
+    }
 
-    public static ResponseSpecification ResponseSpec201 = new ResponseSpecBuilder()
-            .expectStatusCode(201)
-            .log(ALL)
-            .build();
-
-    public static ResponseSpecification ResponseSpec204 = new ResponseSpecBuilder()
-            .expectStatusCode(204)
-            .log(ALL)
-            .build();
-
-    public static ResponseSpecification ResponseSpec404 = new ResponseSpecBuilder()
-            .expectStatusCode(404)
-            .log(ALL)
-            .build();
 }
