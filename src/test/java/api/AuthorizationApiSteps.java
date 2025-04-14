@@ -15,7 +15,7 @@ public class AuthorizationApiSteps {
     public static RegisterResponse getAuthCookie() {
         ObjectMapper objectMapper = new ObjectMapper();
         RegisterRequest registerRequest;
-        File jsonFile = new File(AuthorizationApiSteps.class.getResource("/loginData.json").getFile());
+        File jsonFile = new File("src/test/resources/loginData.json");
         try {
             registerRequest = objectMapper.readValue(jsonFile, RegisterRequest.class);
         } catch (IOException e) {
